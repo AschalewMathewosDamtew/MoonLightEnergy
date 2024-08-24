@@ -16,11 +16,12 @@ import data_analysis as da
 st.title("Solar Radiation Data Analysis")
 
 # Load data
-df = da.load_data('data/benin-malanville.csv')
+df = da.load_data('../data/benin-malanville.csv')
+
 
 # Sidebar
 option = st.sidebar.selectbox("Select Analysis", ("Summary Statistics", "Time Series Analysis", 
-                                                  "Correlation Analysis", "Wind Analysis", 
+                                                  "Correlation Analysis", "Create Wind Plot", 
                                                   "Temperature Analysis", "Histograms", 
                                                   "Z-Score Analysis", "Bubble Chart"))
 
@@ -31,8 +32,8 @@ elif option == "Time Series Analysis":
     da.time_series_analysis(df)
 elif option == "Correlation Analysis":
     da.correlation_analysis(df)
-elif option == "Wind Analysis":
-    da.wind_analysis(df)
+elif option == "Create Wind Analysis":
+    da.create_polar_plot(df, 'Wind Direction')
 elif option == "Temperature Analysis":
     da.temperature_analysis(df)
 elif option == "Histograms":
