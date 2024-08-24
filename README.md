@@ -26,8 +26,6 @@ The goal of this challenge is to explore and analyze the provided solar farm dat
 
 4. **Explore the Data:** The data needed for analysis is available in the `data` directory. Use these datasets for your exploration and analysis.
 
-5. **Submit Your Work:** Gather your analysis, including code, reports, and visualizations, and follow the provided instructions for submission.
-
 **File Structure**
 - `data/` - Directory containing both raw and processed datasets.
 - `src/notebooks/` - Jupyter notebooks used for analysis and model development.
