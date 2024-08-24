@@ -1,13 +1,17 @@
 import pandas as pd
 import numpy as np
+import os
+
 
 COLUMNS_TO_CHECK = ['GHI', 'DNI', 'DHI', 'ModA', 'ModB', 'WS', 'WSgust']
 
+
 def load_data():
+    base_path = os.path.dirname(os.path.abspath(__file__))
     datasets = {
-        "Benin": pd.read_csv('../data/benin-malanville.csv'),
-        "Togo": pd.read_csv('../data/togo-dapaong_qc.csv'),
-        "Sierra Leone": pd.read_csv('../data/sierraleone-bumbuna.csv')
+        "Benin": pd.read_csv(os.path.join(base_path, '../data/benin-malanville.csv')),
+        "Togo": pd.read_csv(os.path.join(base_path, '../data/togo-dapaong_qc.csv')),
+        "Sierra Leone": pd.read_csv(os.path.join(base_path, '../data/sierraleone-bumbuna.csv'))
     }
     return datasets
 
