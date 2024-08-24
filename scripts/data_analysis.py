@@ -7,6 +7,8 @@ import seaborn as sns
 from scipy.stats import zscore
 import plotly.express as px
 
+benin = pd.read_csv('../data/benin-malanville.csv')
+
 # 1. Load the dataset
 def load_data(filepath):
     return pd.read_csv(filepath, parse_dates=['Timestamp'])
@@ -37,11 +39,35 @@ def correlation_analysis(df):
     plt.show()
 
 # 6. Wind Analysis (Polar Plot)
-def wind_analysis(df):
-    fig = px.scatter_polar(df, r="WS", theta="WD", color="WSgust", 
-                           title="Wind Speed and Direction")
-    fig.show()
-
+def create_polar_plot(data, title):
+    # Filter out rows where wind speed is zero or missing
+    filtered_data = data[data['WS'] > 0].copy()
+    
+    # Convert wind direction to radians for plotting
+    filtered_data['WD_rad'] = np.deg2rad(filtered_data['WD'])
+    
+    # Create the polar plot
+    plt.figure(figsize=(8, 8))
+    ax = plt.subplot(111, projection='polar')
+    
+    # Plot the data
+    scatter = ax.scatter(filtered_data['WD_rad'], filtered_data['WS'], 
+                         c=filtered_data['WS'], cmap='viridis', alpha=0.75)
+    
+    # Customize the plot
+    ax.set_theta_zero_location('N')  # North is at the top
+    ax.set_theta_direction(-1)       # Clockwise direction
+    plt.title(title)
+    
+    # Add color bar for wind speed
+    cbar = plt.colorbar(scatter)
+    cbar.set_label('Wind Speed (m/s)')
+    
+    # Display the plot
+    plt.show()
+create_polar_plot(benin, 'Wind Speed and Direction - Sierra Leone Bumbuna')
+# create_polar_plot(togo, 'Wind Speed and Direction - Togo Dapaong')
+# create_polar_plot(benin, 'Wind Speed and Direction - Benin-malanville')
 # 7. Temperature Analysis
 def temperature_analysis(df):
     fig, ax = plt.subplots()
